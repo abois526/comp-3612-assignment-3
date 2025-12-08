@@ -1,10 +1,7 @@
-/*---------- ID HEADER ---------------------------------------------------------
-/  Author(s):   Andrew Boisvert
-/  Email(s):    abois526@mtroyal.ca 
-/  File Name:   paintings-router.js
-/  Description:
-/    Handles all available routes for the paintings data.
-/-----------------------------------------------------------------------------*/
+/**
+ * @file Handles all available routes for the paintings data.
+ * @author Andrew Boisvert <abois526@mtroyal.ca>
+ */
 
 /*--------------------------------------
 / SECTION: Module Imports
@@ -15,9 +12,9 @@ const { jsonMessage } = require("./utils.js");
 / SECTION: Functions
 /-------------------------------------*/
 /**
- * @description returns JSON for all galleries
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @description returns JSON for all paintings
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
 */
 function handleAll(provider, app) {
   app.get("/api/paintings", (req, resp) => {
@@ -28,8 +25,8 @@ function handleAll(provider, app) {
 
 /**
  * @description returns JSON for all paintings with a specified painting ID
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
  */
 function handleById(provider, app) {
   app.get("/api/painting/:id", (req, resp) => {
@@ -42,16 +39,16 @@ function handleById(provider, app) {
     if (matches.length > 0) {
       resp.json(matches);
     } else {
-      resp.status(404);
-      resp.json(jsonMessage(`No painting matches found for painting ID ${id}`));
+      resp.status(404).json(jsonMessage(
+        `No painting matches found for painting ID ${id}`));
     }
   });
 }
 
 /**
  * @description returns JSON for all paintings with a specified gallery ID
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
  */
 function handleByGalleryId(provider, app) {
   app.get("/api/painting/gallery/:galleryId", (req, resp) => {
@@ -64,16 +61,16 @@ function handleByGalleryId(provider, app) {
     if (matches.length > 0) {
       resp.json(matches);
     } else {
-      resp.status(404);
-      resp.json(jsonMessage(`No painting matches found for gallery ID ${galleryId}`));
+      resp.status(404).json(jsonMessage(
+        `No painting matches found for gallery ID ${galleryId}`));
     }
   });
 }
 
 /**
  * @description returns JSON for all paintings with a specified artist ID
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
  */
 function handleByArtistId(provider, app) {
   app.get("/api/painting/artist/:artistId", (req, resp) => {
@@ -86,16 +83,16 @@ function handleByArtistId(provider, app) {
     if (matches.length > 0) {
       resp.json(matches);
     } else {
-      resp.status(404);
-      resp.json(jsonMessage(`No painting matches found for artist ID ${artistId}`));
+      resp.status(404).json(jsonMessage(
+        `No painting matches found for artist ID ${artistId}`));
     }
   });
 }
 
 /**
  * @description returns JSON for all paintings whose yearOfWork field is between the supplied values
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
  */
 function handleByYearOfWork(provider, app) {
   app.get("/api/painting/year/:min/:max", (req, resp) => {
@@ -107,16 +104,16 @@ function handleByYearOfWork(provider, app) {
     if (matches.length > 0) {
       resp.json(matches);
     } else {
-      resp.status(404);
-      resp.json(jsonMessage(`No painting matches found that were produced between the years ${min} - ${max}`));
+      resp.status(404).json(jsonMessage(
+        `No painting matches found that were produced between the years ${min} - ${max}`));
     }
   });
 }
 
 /**
  * @description returns JSON for all paintings whose title contains the provided text (case-insensitive)
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
  */
 function handleByTitleContains(provider, app) {
   app.get("/api/painting/title/:substring", (req, resp) => {
@@ -127,16 +124,16 @@ function handleByTitleContains(provider, app) {
     if (matches.length > 0) {
       resp.json(matches);
     } else {
-      resp.status(404);
-      resp.json(jsonMessage(`No painting matches found whose title contains ${substring}`));
+      resp.status(404).json(jsonMessage(
+        `No painting matches found whose title contains ${substring}`));
     }
   });
 }
 
 /**
  * @description returns JSON for all paintings that have a color that matches the name of the provided hex value (case-insensitive)
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
  */
 function handleByColor(provider, app) {
   app.get("/api/painting/color/:name", (req, resp) => {
@@ -147,8 +144,8 @@ function handleByColor(provider, app) {
     if (matches.length > 0) {
       resp.json(matches);
     } else {
-      resp.status(404);
-      resp.json(jsonMessage(`No painting matches found for color ${color}`));
+      resp.status(404).json(jsonMessage(
+        `No painting matches found for color ${color}`));
     }
   });
 }

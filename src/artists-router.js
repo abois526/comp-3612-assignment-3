@@ -1,10 +1,7 @@
-/*---------- ID HEADER ---------------------------------------------------------
-/  Author(s):   Andrew Boisvert
-/  Email(s):    abois526@mtroyal.ca 
-/  File Name:   artists-router.js
-/  Description:
-/    Handles all available routes for the artists data.
-/-----------------------------------------------------------------------------*/
+/**
+ * @file Handles all available routes for the artists data.
+ * @author Andrew Boisvert <abois526@mtroyal.ca>
+ */
 
 /*--------------------------------------
 / SECTION: Module Imports
@@ -16,8 +13,8 @@ const { jsonMessage } = require("./utils.js");
 /-------------------------------------*/
 /**
  * @description returns JSON for all artists
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
 */
 function handleAll(provider, app) {
   app.get("/api/artists/", (req, resp) => {
@@ -28,8 +25,8 @@ function handleAll(provider, app) {
 
 /**
  * @description returns JSON for all artists from the specified country (case-insensitive)
- * @param {Module} provider module object for "./data-providers.js"
- * @param {Express} app the express application
+ * @param {Object} provider the object for the data providers module
+ * @param {Object} app the object for the express application
  */
 function handleByCountry(provider, app) {
   app.get("/api/artists/:country", (req, resp) => {
@@ -42,8 +39,8 @@ function handleByCountry(provider, app) {
     if (matches.length > 0) {
       resp.json(matches);
     } else {
-      resp.status(404);
-      resp.json(jsonMessage(`No artist matches found for the country ${country}`));
+      resp.status(404).json(jsonMessage(
+        `No artist matches found for the country ${country}`));
     }
   });
 }
